@@ -22,14 +22,11 @@ module.exports = {
   },
   resolve: {
     root: __dirname,
-    modulesDirectories: [
-      './app/components',
-      'node_modules'
-    ],
+    modulesDirectories: ['app/components','node_modules'],
     alias: {
       applicationStyles: 'app/styles/app.scss'
     },
-    extension: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx']
   },
   module: {
     loaders: [
