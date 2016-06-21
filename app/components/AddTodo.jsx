@@ -6,9 +6,11 @@ var AddTodo = React.createClass({
 
     var text = this.refs.todo.value;
 
-    if (text.match(/^[0-9a-zA-Z]*$/) && text !== "") {
+    if (text.length > 0) {
       this.refs.todo.value = '';
       this.props.onAddTodo(text);
+    } else {
+      this.refs.todo.focus();
     }
   },
   render: function () {
@@ -16,7 +18,7 @@ var AddTodo = React.createClass({
       <div>
         <form ref="form" onSubmit={this.onSubmit} className="add-todo">
           <input type="text" ref="todo" placeholder="What do you need to to?" />
-          <button className="button">Add Todo</button>
+          <button className="button expanded">Add Todo</button>
         </form>
       </div>
     );
