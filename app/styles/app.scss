@@ -7,4 +7,7 @@
 @include foundation-everything;
 
 // components
-@import "components/AddTodo";
+
+@import "components/container";
+@import "components/page-title";
+@import "components/todo";
