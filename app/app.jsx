@@ -1,4 +1,5 @@
 var React = require('react');
+var {Provider} = require('react-redux');
 var ReactDOM = require('react-dom');
 
 // this syntax is basically doing this
@@ -25,6 +26,8 @@ $(document).foundation();
 require('style!css!sass!applicationStyles')
 
 ReactDOM.render(
-  <TodoApp/>,
+  <Provider store={store}>
+    <TodoApp/>
+  </Provider>,
   document.getElementById('app')
 );
