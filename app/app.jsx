@@ -11,9 +11,16 @@ var TodoApp = require('TodoApp');
 var actions = require('actions');
 var store = require('configureStore').configure();
 
+var TodoAPI = require('TodoAPI');
+
 store.subscribe(() => {
-  console.log('New State', store.getState());
+  var state = store.getState();
+  console.log('New State', state);
+  TodoAPI.setTodos(state.todos);
 });
+
+ var initialTodos = TodoAPI.getTodos();
+ store.dispatch(actions.addTodos(initialTodos));
 
 // store.dispatch(actions.addTodo('clean the yard'));
 // store.dispatch(actions.setSearchText('yard'));
