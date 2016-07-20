@@ -1,4 +1,3 @@
-var $ = require('jQuery');
 
 module.exports = {
   setTodos: function(todos) {
