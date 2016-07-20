@@ -15,6 +15,30 @@ export var addTodo = (todo) => {
   };
 };
 
+export var startAddTodos = () => {
+  return (dispatch, getState) => {
+    var todosRef = firebaseRef.child('todos');
+
+    // returns a promise that will get called with data snapshot
+    // adding "return" here daisy chains the promise so it can be used in our
+    // tests
+    return todosRef.once('value').then((snapshot) => {
+      var todos = snapshot.val() || {};
+      var parsedTodos = [];
+
+      // foreach gets a callback function, getting called with that item
+      Object.keys(todos).forEach((todoId) => {
+        parsedTodos.push({
+          id: todoId,
+          ...todos[todoId]
+        });
+      });
+
+      dispatch(addTodos(parsedTodos));
+    });
+  };
+};
+
 export var addTodos = (todos) => {
   return {
     type: 'ADD_TODOS',
