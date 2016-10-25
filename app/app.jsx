@@ -4,15 +4,21 @@ var ReactDOM = require('react-dom');
 
 // this syntax is basically doing this
 // create a variable called X where { X } will be set to requre('react-router').X
-var {Route, Router, IndexRoute, hashHistory} = require('react-router');
-
-import TodoApp from 'TodoApp';
-import Login from 'Login';
+var {hashHistory} = require('react-router');
 
 var actions = require('actions');
 var store = require('configureStore').configure();
 
-var TodoAPI = require('TodoAPI');
+import firebase from 'app/firebase/';
+import router from 'app/router/';
+
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    hashHistory.push('/todos');
+  } else {
+    hashHistory.push('/');
+  }
+});
 
 store.dispatch(actions.startAddTodos());
 
@@ -24,12 +30,7 @@ require('style!css!sass!applicationStyles')
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={hashHistory}>
-      <Route path="/">
-        <Route path="todos" component={TodoApp}/>
-        <IndexRoute component={Login}/>
-      </Route>
-    </Router>
+    {router}
   </Provider>,
   document.getElementById('app')
 );
