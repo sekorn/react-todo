@@ -6,7 +6,8 @@ var ReactDOM = require('react-dom');
 // create a variable called X where { X } will be set to requre('react-router').X
 var {Route, Router, IndexRoute, hashHistory} = require('react-router');
 
-var TodoApp = require('TodoApp');
+import TodoApp from 'TodoApp';
+import Login from 'Login';
 
 var actions = require('actions');
 var store = require('configureStore').configure();
@@ -23,7 +24,12 @@ require('style!css!sass!applicationStyles')
 
 ReactDOM.render(
   <Provider store={store}>
-    <TodoApp/>
+    <Router history={hashHistory}>
+      <Route path="/">
+        <Route path="todos" component={TodoApp}/>
+        <IndexRoute component={Login}/>
+      </Route>
+    </Router>
   </Provider>,
   document.getElementById('app')
 );
