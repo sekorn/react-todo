@@ -161,4 +161,27 @@ describe('actions', () => {
       }, done);
     });
   });
+
+  describe('Authentication Tests', () => {
+    it('should generate login action object', () => {
+      const action = {
+        type: 'LOGIN',
+        uid: '123abc'
+      };
+
+      const res = actions.Login(action.uid);
+
+      expect(res).toEqual(action);
+    });
+
+    it('should dispatch start logout action', () => {
+      const action = {
+        type: 'LOGOUT'
+      };
+
+      const res = actions.Logout();
+
+      expect(res).toEqual(action);
+    });
+  });
 });
